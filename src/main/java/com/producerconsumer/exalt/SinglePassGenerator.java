@@ -10,10 +10,12 @@ import java.util.Date;
 @Service
 public class SinglePassGenerator {
 
+
+    //Generates single pass
     @Bean
     public Pass generatePass(PassIn passIn){
 
-    DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         Date dateTimeNow = new Date();
 
         //private List<Pass> passList;
