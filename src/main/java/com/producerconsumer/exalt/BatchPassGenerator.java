@@ -14,21 +14,26 @@ import java.util.stream.Collectors;
 @Component
 public class BatchPassGenerator{
 
+
     private final List<Pass> batch = new ArrayList<>();
 
     private final NameGenerator nameGenerator= new NameGenerator();
 
     DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
     Date dateTimeNow;
+    Date dateOFBirth;
 
-
+    // Generates pass in batch with the required inPut of number of passes
+    // date of birth, date & time of generation, date & time of request are taken as current date and time
     public List<Pass> generatePassBatch(int numberOfPasses) {
         boolean statusVIP = new Random().nextBoolean();
 
-        dateTimeNow = new Date();
-        Date dateOFBirth = new Date();
-
         for(int i = 1; i<=numberOfPasses; i++){
+            if(i==1){
+                batch.clear();
+            }
+            dateTimeNow = new Date();
+            dateOFBirth = new Date();
             Pass pass = new Pass(nameGenerator.nameGenerator(), nameGenerator.nameGenerator(), statusVIP, dateOFBirth, dateFormat.format(dateTimeNow), dateFormat.format(dateTimeNow));
             batch.add(pass);
         }
@@ -36,7 +41,8 @@ public class BatchPassGenerator{
     }
 
 
-
+    // Generates pass in batch with required inPut list of passes with minimum required fields
+    // required -> first name, last name, vip status & date of birth
     public List<Pass> generatePassBatch(List<PassIn> passInList) {
 
         List<PassIn> passListToBeGenerated;
